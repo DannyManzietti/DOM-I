@@ -40,3 +40,86 @@ const siteContent = {
 // Example: Update the img src for the logo
 let logo = document.getElementById("logo-img");
 logo.setAttribute('src', siteContent["nav"]["img-src"])
+
+
+// Update the nav items text content
+const navItems = document.querySelectorAll('nav a');
+navItems.forEach((a,b) => {
+  a.textContent = siteContent.nav[`nav-item-${b+1}`];
+
+  a.style.color = 'gray';
+  });
+
+// Utilize .appendChild() and .prepend() to add two new items to the navigation system. You can call them whatever you want.
+const blogNav = document.createElement('a');
+blogNav.setAttribute('href', '#');
+blogNav.style.color = 'gray';
+blogNav.textContent = 'Blog';
+
+const careerNav = document.createElement('a');
+careerNav.setAttribute('href', '#');
+careerNav.style.color = 'gray';
+careerNav.textContent = 'Career';
+
+const headerNav = document.querySelector('header nav');
+headerNav.appendChild(blogNav);
+headerNav.prepend(careerNav);
+
+
+// Update the cta-text h1
+const h1Tag = document.querySelector('.cta-text h1');
+const h1Words = siteContent.cta.h1.split(' ');  // The words in h1 split into an array
+h1Words.forEach(i => {
+  const el = document.createElement('div');     // Create new div to allow new line for each word
+  el.textContent = i;
+  h1Tag.append(el);
+});
+
+// Update cta-text button
+const ctaButton = document.querySelector('.cta-text button');
+ctaButton.textContent = siteContent.cta.button;
+
+// Update cta-image
+const ctaImage = document.querySelector('#cta-img');
+ctaImage.setAttribute('src', siteContent.cta["img-src"]);
+
+// Update content
+const contentArr = ['features', 'about', 'services', 'product', 'vision'];
+
+const contentEl = document.querySelectorAll('.text-content');
+contentEl.forEach((a, b) => {
+  // Update the h4 text
+  a.querySelector('h4').textContent = siteContent["main-content"][`${contentArr[b]}-h4`];
+  // Update the p text
+  a.querySelector('p').textContent = siteContent["main-content"][`${contentArr[b]}-content`];
+});
+
+// Update middle-img
+document.querySelector('#middle-img').setAttribute('src', siteContent["main-content"]["middle-img-src"]);
+
+// Update Contact
+const contactEl = document.querySelector('.contact');
+contactEl.querySelector('h4').textContent = siteContent.contact["contact-h4"]; // Updata Contact - h4
+
+const contactDetail = ['address', 'phone', 'email'];
+
+contactEl.querySelectorAll('p').forEach((a,b) => {
+  if (a !== 0) {
+    a.textContent = siteContent.contact[contactDetail[b]];  // Update Contact - phone and email
+  } else {
+    const address = siteContent.contact[contactDetail[i]].split(' ');
+    const stateInd = address.indexOf(address.find( a => a.includes(',')));
+    // the street address
+    const street = document.createElement('div');
+    street.textContent = address.slice(0, stateInd).join(' ');
+    a.append(street);
+    // the state address
+    const state = document.createElement('div');
+    state.textContent = address.slice(stateInd).join(' ');
+    a.append(state);
+
+  }
+});
+
+// Update Footer
+document.querySelector('footer p').textContent = siteContent.footer.copyright;
